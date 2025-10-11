@@ -6,7 +6,7 @@ describe('Get Elements', () => {
 
         //contains() - para encontrar elementos que contenham um texto específico
         //geralmente diminuimos o escopo com um get() antes
-        cy.get('#top_header').as('cabecalho')
+        cy.get('#top_header').as('cabecalho') //as() - alias()
             .contains('Login')
 
 
@@ -15,8 +15,7 @@ describe('Get Elements', () => {
         cy.get('@cabecalho')
             .find('.fa-user')
 
-        //as() - alias()
-        //criar apelidos para elementos
+        
         cy.get('@cabecalho')
             .find('.fa-user')
     })

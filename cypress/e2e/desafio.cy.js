@@ -1,8 +1,7 @@
 describe('Desafio - Cadastro de usuário', () =>{
 
-    const user_name = 'Gabriel'
-    const user_email = 'teste@teste.com'
-    const user_password = '1234567'
+   const { faker } = require('@faker-js/faker');
+   const user_data = require('../fixtures/desafio_valido.json')
 
     it('Validar Campo "Nome" vazio', () => {
         cy.visit('/')
@@ -32,7 +31,7 @@ describe('Desafio - Cadastro de usuário', () =>{
             .contains('Cadastro de usuário')
         
         cy.get('#user')
-         .type(user_name)
+         .type(user_data.name)
 
         cy.get('#btnRegister').click()
 
@@ -52,7 +51,7 @@ describe('Desafio - Cadastro de usuário', () =>{
             .contains('Cadastro de usuário')
         
         cy.get('#user')
-         .type(user_name)
+         .type(user_data.name)
 
         cy.get('#email')
             .type('teste@teste')
@@ -74,10 +73,10 @@ describe('Desafio - Cadastro de usuário', () =>{
             .contains('Cadastro de usuário')
         
         cy.get('#user')
-         .type(user_name)
+         .type(user_data.name)
 
         cy.get('#email')
-            .type(user_email)
+            .type(user_data.email)
 
         cy.get('#btnRegister').click()
 
@@ -97,10 +96,10 @@ describe('Desafio - Cadastro de usuário', () =>{
             .contains('Cadastro de usuário')
         
         cy.get('#user')
-         .type(user_name)
+         .type(user_data.name)
 
         cy.get('#email')
-            .type(user_email)
+            .type(user_data.email)
 
         cy.get('#password')
             .type('123')
@@ -112,7 +111,10 @@ describe('Desafio - Cadastro de usuário', () =>{
             .should('contain', 'O campo senha deve ter pelo menos 6 dígitos')
     })
 
-     it('Validar login com sucesso', () => {
+     it.only('Validar login com sucesso', () => {
+
+        const fullName = faker.person.fullName();
+
         cy.visit('/')
             cy.get('.header-logo')
 
@@ -123,19 +125,19 @@ describe('Desafio - Cadastro de usuário', () =>{
             .contains('Cadastro de usuário')
         
         cy.get('#user')
-         .type(user_name)
+         .type(fullName)
 
         cy.get('#email')
-            .type(user_email)
+            .type(faker.internet.email())
 
         cy.get('#password')
-            .type(user_password)
+            .type(faker.internet.password({ length: 8 }))
 
         cy.get('#btnRegister').click()
 
         cy.get('#swal2-html-container')
             .should('be.visible')
-            .should('contain', `Bem-vindo ${user_name}`)
+            .should('contain', `Bem-vindo ${fullName}`)
     })
 
     
