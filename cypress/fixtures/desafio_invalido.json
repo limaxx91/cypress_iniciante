@@ -1,5 +1,5 @@
 {
     "name": "John Doe",
     "email": "teste@teste.com",
-    "password": "teste123"
+    "invalid_password": "123"
 }

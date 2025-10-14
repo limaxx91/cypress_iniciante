@@ -1,18 +1,22 @@
+
 describe('Desafio - Cadastro de usuário', () =>{
 
-   const { faker } = require('@faker-js/faker');
-   const user_data = require('../fixtures/desafio_invalido.json')
-
-    it('Validar Campo "Nome" vazio', () => {
-
-        cy.visit('/')
-        cy.get('.header-logo')
+     beforeEach('Acessando a págima de cadastro', () => {
+            cy.visit('/')
+            cy.get('.header-logo')
 
         cy.get('.fa-lock')
             .click()
     
         cy.get('.account_form > h3')
             .contains('Cadastro de usuário')
+
+        })
+
+   const { faker } = require('@faker-js/faker');
+   const user_data = require('../fixtures/desafio_invalido.json')
+
+    it('Validar Campo "Nome" vazio', () => {
 
         cy.get('#btnRegister').click()
 
@@ -22,15 +26,7 @@ describe('Desafio - Cadastro de usuário', () =>{
     })
 
     it('Validar campo "E-mail" vazio', () => {
-        cy.visit('/')
-            cy.get('.header-logo')
-
-        cy.get('.fa-lock')
-            .click()
-    
-        cy.get('.account_form > h3')
-            .contains('Cadastro de usuário')
-        
+      
         cy.get('#user')
          .type(user_data.name)
 
@@ -42,15 +38,7 @@ describe('Desafio - Cadastro de usuário', () =>{
     })
 
      it('Validar campo "E-mail" inválido', () => {
-        cy.visit('/')
-            cy.get('.header-logo')
-
-        cy.get('.fa-lock')
-            .click()
     
-        cy.get('.account_form > h3')
-            .contains('Cadastro de usuário')
-        
         cy.get('#user')
          .type(user_data.name)
 
@@ -86,15 +74,8 @@ describe('Desafio - Cadastro de usuário', () =>{
             .should('contain', 'O campo senha deve ter pelo menos 6 dígitos')
     })
 
-     it.only('Validar campo "Senha" inválido', () => {
-        cy.visit('/')
-            cy.get('.header-logo')
-
-        cy.get('.fa-lock')
-            .click()
-    
-        cy.get('.account_form > h3')
-            .contains('Cadastro de usuário')
+     it('Validar campo "Senha" inválido', () => {
+        
         
         cy.get('#user')
          .type(user_data.name)
@@ -116,15 +97,7 @@ describe('Desafio - Cadastro de usuário', () =>{
 
         const fullName = faker.person.fullName();
 
-        cy.visit('/')
-            cy.get('.header-logo')
-
-        cy.get('.fa-lock')
-            .click()
-    
-        cy.get('.account_form > h3')
-            .contains('Cadastro de usuário')
-        
+                
         cy.get('#user')
          .type(fullName)
 
